@@ -6,7 +6,10 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
 
-   //di chuyen
+    public MobileControls mobileControls;
+
+
+    //di chuyen
     public float speed = 5f;          
     private float moveInput;        
     private Rigidbody2D rb;           
@@ -37,6 +40,13 @@ public class PlayerController : MonoBehaviour
     {
      //bam trai quai di chuyen 
         moveInput = Input.GetAxisRaw("Horizontal");
+
+        if (mobileControls != null)
+        {
+            if (mobileControls.isPressingLeft) moveInput = -1f;
+            if (mobileControls.isPressingRight) moveInput = 1f;
+        }
+
         anim.SetFloat("Speed", Mathf.Abs(moveInput));
         
 
@@ -92,4 +102,18 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    public void MobileJump()
+    {
+        if (isGrounded) // dùng ?úng tên bi?n isGrounded trong code c?a b?n
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+
+    public void MobileAttack()
+    {
+        // G?i hàm attack hi?n t?i c?a b?n
+        Attack(); // ??i tên n?u hàm c?a b?n tên khác
+    }
+
 }
