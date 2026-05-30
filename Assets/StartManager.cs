@@ -11,6 +11,8 @@ public class StartManager : MonoBehaviour
 
     void Start()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         // Hi?n panel lúc ??u + d?ng game
         startPanel.SetActive(true);
      
